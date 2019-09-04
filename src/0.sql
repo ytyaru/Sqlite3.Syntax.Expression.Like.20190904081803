@@ -25,4 +25,19 @@ select '1a' like collate binary '_A';
 --   ASCII文字以外は区別する
 select '1ｱ' like '_ア';
 select '12' like '_２';
+-- ASCII文字を区別するよう設定する
+PRAGMA case_sensitive_like = true;
+select '1a' like '_A';
+select '1A' like '_A';
+PRAGMA case_sensitive_like = false;
+
+-- like()関数
+select like('_A', '1A');
+select like('_A', '11A');
+select like('%A', '11A');
+select like('%\%', '100%', '\');
+
+-- NOT
+select '1A' not like '_A';
+select not like('_A', '1A');
 
